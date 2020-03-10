@@ -67,7 +67,6 @@ function spatial(opts={}) {
         d3.max(data, d => xValue(d))
       ])
       .rangeRound([0, width]);
-
     yScale
       .domain([
         d3.min(data, d => yValue(d)),
@@ -79,18 +78,11 @@ function spatial(opts={}) {
     let points = svg.append("g")
       .selectAll(".scatterPoint")
         .data(data);
-
     points.exit().remove();
 
     // YOUR CODE HERE:
     // Here, you can modify the radius or any other quality of the points
     // in order to encode additional data.
-    // rScale
-    //   .domain([
-    //     d3.min(data, d => +d['trip start count']),
-    //     d3.max(data, d => +d['trip start count'])
-    //     ])
-    //   .range([1, 100]);
 
     points = points.enter()
       .append("circle")
@@ -101,8 +93,15 @@ function spatial(opts={}) {
         .attr("r", (d) => { return 5; })
         // .attr("r", (d) => { return rScale(+d['trip start count'])})
         .attr("fill", "purple")
-        .attr("opacity", 0.7);
+        .attr("opacity", 5);
     
+    rScale
+      .domain([
+        d3.min(data, d => +d['trip start count']),
+        d3.max(data, d => +d['trip start count'])
+      ])
+      .range([5, 50]);
+
     selectableElements = points;
     
     svg.call(brush);

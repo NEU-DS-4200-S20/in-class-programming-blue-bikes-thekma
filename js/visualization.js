@@ -9,7 +9,7 @@
     // x and y attributes, 
     // a div id selector to put our svg in; and the data to use.
     let spatialPlot = spatial({
-        'backgroundImage': null
+        'backgroundImage': 'my-awesome-image.png'
       })
       .x(d => +d.Longitude)
       .y(d => +d.Latitude)
